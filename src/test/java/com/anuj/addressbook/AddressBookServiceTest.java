@@ -189,4 +189,69 @@ public class AddressBookServiceTest {
         assertEquals(1,
                 service.getAddressBook("friends").getContacts().size());
     }
+
+    @Test
+    public void givenExistingContact_whenUpdated_shouldReturnUpdatedContact() {
+
+        AddressBookService service = new AddressBookService();
+
+        Contact original = createContact();
+
+        service.addContact("personal", original);
+
+        Contact updated = new Contact(
+                "Anuj",
+                "Vishwakarma",
+                "Future City",
+                "Nova",
+                "Geornite",
+                "565645",
+                "8888888888",
+                "anuj@update.com"
+        );
+
+        Contact result = service.updateContact(
+                "personal",
+                "Anuj",
+                "Vishwakarma",
+                updated
+        );
+
+        assertEquals("Future City", result.getCity());
+        assertEquals("8888888888", result.getPhoneNumber());
+    }
+
+    @Test
+    public void givenNonExistingContact_whenUpdate_shouldReturnNull() {
+
+        AddressBookService service = new AddressBookService();
+
+        Contact updated = new Contact();
+
+        Contact result = service.updateContact(
+                "personal",
+                "Unknown",
+                "Person",
+                updated
+        );
+
+        assertNull(result);
+    }
+
+    @Test
+    public void givenMissingAddressBook_whenUpdate_shouldReturnNull() {
+
+        AddressBookService service = new AddressBookService();
+
+        Contact updated = new Contact();
+
+        Contact result = service.updateContact(
+                "unknownBook",
+                "Anuj",
+                "Vishwakarma",
+                updated
+        );
+
+        assertNull(result);
+    }
 }
