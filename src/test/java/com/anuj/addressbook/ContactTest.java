@@ -1,6 +1,6 @@
 package com.anuj.addressbook;
 
-import com.anuj.addressbook.Contact;
+import com.anuj.addressbook.model.Contact;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
