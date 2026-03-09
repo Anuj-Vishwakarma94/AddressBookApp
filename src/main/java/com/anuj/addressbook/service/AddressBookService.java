@@ -28,7 +28,10 @@ public class AddressBookService {
         return contact;
     }
 
-    public Contact updateContact(String bookName, String firstName, String lastName, Contact updatedContact) {
+    public Contact updateContact(String bookName,
+            String firstName,
+            String lastName,
+            Contact updatedContact) {
 
         AddressBook book = addressBooks.get(bookName);
 
@@ -39,10 +42,8 @@ public class AddressBookService {
         for (Contact contact : book.getContacts()) {
 
             if (contact.getFirstName().equals(firstName) &&
-                contact.getLastName().equals(lastName)) {
+                    contact.getLastName().equals(lastName)) {
 
-                contact.setFirstName(updatedContact.getFirstName());
-                contact.setLastName(updatedContact.getLastName());
                 contact.setAddress(updatedContact.getAddress());
                 contact.setCity(updatedContact.getCity());
                 contact.setState(updatedContact.getState());
@@ -56,6 +57,7 @@ public class AddressBookService {
 
         return null;
     }
+
     public boolean deleteContact(String bookName,
             String firstName,
             String lastName) {
@@ -81,6 +83,22 @@ public class AddressBookService {
         return book.getContacts();
     }
 
+    public AddressBook createAddressBook(String name) {
+
+        if(addressBooks.containsKey(name)) {
+            return addressBooks.get(name);
+        }
+
+        AddressBook book = new AddressBook(name);
+        addressBooks.put(name, book);
+
+        return book;
+    }
+
+    public Map<String, AddressBook> getAllAddressBooks() {
+        return addressBooks;
+    }
+    
     public AddressBook getAddressBook(String name) {
         return addressBooks.get(name);
     }
