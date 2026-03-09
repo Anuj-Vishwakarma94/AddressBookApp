@@ -4,9 +4,6 @@ import com.anuj.addressbook.model.AddressBook;
 import com.anuj.addressbook.model.Contact;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import java.util.*;
 
 @Service
@@ -18,9 +15,20 @@ public class AddressBookService {
 
         AddressBook book = addressBooks.get(bookName);
 
-        if (book == null) {
+        if(book == null) {
             book = new AddressBook(bookName);
             addressBooks.put(bookName, book);
+        }
+
+        boolean duplicate = book.getContacts()
+                .stream()
+                .anyMatch(existing ->
+                        existing.getFirstName().equals(contact.getFirstName()) &&
+                        existing.getLastName().equals(contact.getLastName())
+                );
+
+        if(duplicate) {
+            throw new RuntimeException("Duplicate contact not allowed");
         }
 
         book.addContact(contact);
