@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.util.*;
+
 @Service
 public class AddressBookService {
 
@@ -26,10 +28,7 @@ public class AddressBookService {
         return contact;
     }
 
-    public Contact updateContact(String bookName,
-            String firstName,
-            String lastName,
-            Contact updatedContact) {
+    public Contact updateContact(String bookName, String firstName, String lastName, Contact updatedContact) {
 
         AddressBook book = addressBooks.get(bookName);
 
@@ -40,8 +39,10 @@ public class AddressBookService {
         for (Contact contact : book.getContacts()) {
 
             if (contact.getFirstName().equals(firstName) &&
-                    contact.getLastName().equals(lastName)) {
+                contact.getLastName().equals(lastName)) {
 
+                contact.setFirstName(updatedContact.getFirstName());
+                contact.setLastName(updatedContact.getLastName());
                 contact.setAddress(updatedContact.getAddress());
                 contact.setCity(updatedContact.getCity());
                 contact.setState(updatedContact.getState());
@@ -55,7 +56,6 @@ public class AddressBookService {
 
         return null;
     }
-
     public boolean deleteContact(String bookName,
             String firstName,
             String lastName) {
@@ -68,6 +68,17 @@ public class AddressBookService {
 
         return book.getContacts().removeIf(contact -> contact.getFirstName().equals(firstName) &&
                 contact.getLastName().equals(lastName));
+    }
+    
+    public List<Contact> getContacts(String bookName) {
+
+        AddressBook book = addressBooks.get(bookName);
+
+        if (book == null) {
+            return new ArrayList<>();
+        }
+
+        return book.getContacts();
     }
 
     public AddressBook getAddressBook(String name) {
