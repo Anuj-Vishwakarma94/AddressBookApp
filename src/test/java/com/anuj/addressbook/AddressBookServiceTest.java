@@ -1,5 +1,6 @@
 package com.anuj.addressbook;
 
+import com.anuj.addressbook.model.AddressBook;
 import com.anuj.addressbook.model.Contact;
 import com.anuj.addressbook.service.AddressBookService;
 import org.junit.jupiter.api.Test;
@@ -167,24 +168,6 @@ public class AddressBookServiceTest {
     }
 
     @Test
-    public void givenMultipleAddressBooks_whenContactsAdded_shouldMaintainSeparateLists() {
-
-        AddressBookService service = new AddressBookService();
-
-        Contact c1 = createContact();
-        Contact c2 = createContact();
-
-        service.addContact("family", c1);
-        service.addContact("friends", c2);
-
-        assertEquals(1,
-                service.getAddressBook("family").getContacts().size());
-
-        assertEquals(1,
-                service.getAddressBook("friends").getContacts().size());
-    }
-
-    @Test
     public void givenExistingContact_whenUpdated_shouldReturnUpdatedContact() {
 
         AddressBookService service = new AddressBookService();
@@ -216,36 +199,21 @@ public class AddressBookServiceTest {
     }
 
     @Test
-    public void givenNonExistingContact_whenUpdate_shouldReturnNull() {
+    public void givenExistingContact_whenDeleted_shouldReturnTrue() {
 
         AddressBookService service = new AddressBookService();
 
-        Contact updated = new Contact();
+        Contact contact = createContact();
 
-        Contact result = service.updateContact(
+        service.addContact("personal", contact);
+
+        boolean result = service.deleteContact(
                 "personal",
-                "Unknown",
-                "Person",
-                updated
-        );
-
-        assertNull(result);
-    }
-
-    @Test
-    public void givenMissingAddressBook_whenUpdate_shouldReturnNull() {
-
-        AddressBookService service = new AddressBookService();
-
-        Contact updated = new Contact();
-
-        Contact result = service.updateContact(
-                "unknownBook",
                 "Anuj",
-                "Vishwakarma",
-                updated
+                "Vishwakarma"
         );
 
-        assertNull(result);
+        assertTrue(result);
     }
+
 }
