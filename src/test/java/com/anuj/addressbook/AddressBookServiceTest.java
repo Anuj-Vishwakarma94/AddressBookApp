@@ -98,14 +98,7 @@ public class AddressBookServiceTest {
         AddressBookService service = new AddressBookService();
 
         Contact contact = new Contact(
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
+                "", "", "", "", "", "", "", ""
         );
 
         service.addContact("personal", contact);
