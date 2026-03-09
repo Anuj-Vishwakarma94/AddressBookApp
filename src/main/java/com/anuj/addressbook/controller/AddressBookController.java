@@ -1,13 +1,13 @@
 package com.anuj.addressbook.controller;
 
+import com.anuj.addressbook.model.AddressBook;
 import com.anuj.addressbook.model.Contact;
 import com.anuj.addressbook.service.AddressBookService;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import java.util.*;
 
 @RestController
-@RequestMapping("/addressbook")
+@RequestMapping("/addressbooks")
 public class AddressBookController {
 
     private final AddressBookService service;
@@ -16,12 +16,12 @@ public class AddressBookController {
         this.service = service;
     }
 
-    @PostMapping("/{bookName}/contacts")
+    @PostMapping("/{name}/contacts")
     public Contact addContact(
-            @PathVariable String bookName,
+            @PathVariable String name,
             @RequestBody Contact contact) {
 
-        return service.addContact(bookName, contact);
+        return service.addContact(name, contact);
     }
 
     @PutMapping("/{bookName}/contacts")
@@ -48,10 +48,22 @@ public class AddressBookController {
 
         return "Contact not found";
     }
-
+    
     @GetMapping("/{bookName}/contacts")
     public List<Contact> getContacts(@PathVariable String bookName) {
 
         return service.getContacts(bookName);
+    }
+    
+    @PostMapping("/{name}")
+    public AddressBook createAddressBook(@PathVariable String name) {
+
+        return service.createAddressBook(name);
+    }
+    
+    @GetMapping
+    public Map<String, AddressBook> getAllAddressBooks() {
+
+        return service.getAllAddressBooks();
     }
 }
