@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AddressBookServiceTest {
 
     private Contact createContact() {
+
         return new Contact(
                 "Anuj",
                 "Vishwakarma",
