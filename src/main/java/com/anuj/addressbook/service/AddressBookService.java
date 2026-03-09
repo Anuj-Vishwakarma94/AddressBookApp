@@ -4,7 +4,6 @@ import com.anuj.addressbook.model.AddressBook;
 import com.anuj.addressbook.model.Contact;
 import org.springframework.stereotype.Service;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,7 +26,10 @@ public class AddressBookService {
         return contact;
     }
 
-    public Contact updateContact(String bookName, String firstName, String lastName, Contact updated) {
+    public Contact updateContact(String bookName,
+            String firstName,
+            String lastName,
+            Contact updatedContact) {
 
         AddressBook book = addressBooks.get(bookName);
 
@@ -38,22 +40,34 @@ public class AddressBookService {
         for (Contact contact : book.getContacts()) {
 
             if (contact.getFirstName().equals(firstName) &&
-                contact.getLastName().equals(lastName)) {
+                    contact.getLastName().equals(lastName)) {
 
-                contact.setFirstName(updated.getFirstName());
-                contact.setLastName(updated.getLastName());
-                contact.setAddress(updated.getAddress());
-                contact.setCity(updated.getCity());
-                contact.setState(updated.getState());
-                contact.setZip(updated.getZip());
-                contact.setPhoneNumber(updated.getPhoneNumber());
-                contact.setEmail(updated.getEmail());
+                contact.setAddress(updatedContact.getAddress());
+                contact.setCity(updatedContact.getCity());
+                contact.setState(updatedContact.getState());
+                contact.setZip(updatedContact.getZip());
+                contact.setPhoneNumber(updatedContact.getPhoneNumber());
+                contact.setEmail(updatedContact.getEmail());
 
                 return contact;
             }
         }
 
         return null;
+    }
+
+    public boolean deleteContact(String bookName,
+            String firstName,
+            String lastName) {
+
+        AddressBook book = addressBooks.get(bookName);
+
+        if (book == null) {
+            return false;
+        }
+
+        return book.getContacts().removeIf(contact -> contact.getFirstName().equals(firstName) &&
+                contact.getLastName().equals(lastName));
     }
 
     public AddressBook getAddressBook(String name) {
