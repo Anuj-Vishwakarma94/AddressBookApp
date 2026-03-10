@@ -720,6 +720,63 @@ public class AddressBookServiceTest {
                 new Contact("Rahul","Verma","","NewJersey","DL","","",""));
 
         Map<String, Long> result = service.countContactsByCity();
+
         assertEquals(2, result.get("NewJersey"));
+    }
+    
+    @Test
+    public void givenContacts_whenSortedByName_shouldReturnAlphabeticalOrder() {
+
+        AddressBookService service = new AddressBookService();
+
+        service.addContact("personal",
+                new Contact("Anuj","Vishwakarma","","","","","",""));
+
+        service.addContact("personal",
+                new Contact("Amit","Sharma","","","","","",""));
+
+        service.addContact("personal",
+                new Contact("Rahul","Verma","","","","","",""));
+
+        List<Contact> sorted = service.sortContactsByName("personal");
+
+        assertEquals("Amit", sorted.get(0).getFirstName());
+    }
+    
+    @Test
+    public void givenEmptyAddressBook_whenSorted_shouldReturnEmptyList() {
+
+        AddressBookService service = new AddressBookService();
+
+        assertEquals(0, service.sortContactsByName("personal").size());
+    }
+    
+    @Test
+    public void givenSingleContact_whenSorted_shouldReturnSameContact() {
+
+        AddressBookService service = new AddressBookService();
+
+        service.addContact("personal",
+                new Contact("Anuj","Vishwakarma","","","","","",""));
+
+        List<Contact> result = service.sortContactsByName("personal");
+
+        assertEquals(1, result.size());
+    }
+    
+    @Test
+    public void givenAlreadySortedContacts_whenSorted_shouldRemainSame() {
+
+        AddressBookService service = new AddressBookService();
+
+        service.addContact("personal",
+                new Contact("Amit","Sharma","","","","","",""));
+
+        service.addContact("personal",
+                new Contact("Rahul","Verma","","","","","",""));
+
+        List<Contact> sorted = service.sortContactsByName("personal");
+
+        assertEquals("Amit", sorted.get(0).getFirstName());
     }
 }
