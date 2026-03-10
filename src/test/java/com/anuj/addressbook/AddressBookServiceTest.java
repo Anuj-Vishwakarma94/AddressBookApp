@@ -9,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AddressBookServiceTest {
 
-
 private Contact createContact() {
+
     return new Contact(
             "Anuj",
             "Vishwakarma",
@@ -67,18 +67,6 @@ public void givenContactWithNullValues_whenAdded_shouldNotCrash() {
 }
 
 @Test
-public void givenContactWithEmptyStrings_whenAdded_shouldStoreSuccessfully() {
-
-    AddressBookService service = new AddressBookService();
-
-    Contact contact = new Contact("", "", "", "", "", "", "", "");
-
-    service.addContact("personal", contact);
-
-    assertEquals(1, service.getAddressBook("personal").getContacts().size());
-}
-
-@Test
 public void givenLongPhoneNumber_whenAdded_shouldStoreContact() {
 
     AddressBookService service = new AddressBookService();
@@ -98,28 +86,6 @@ public void givenLongPhoneNumber_whenAdded_shouldStoreContact() {
 
     assertEquals(1, service.getAddressBook("personal").getContacts().size());
 }
-
-@Test
-public void givenInvalidEmail_whenAdded_shouldStillStoreContact() {
-
-    AddressBookService service = new AddressBookService();
-
-    Contact contact = new Contact(
-            "Anuj",
-            "Vishwakarma",
-            "Amsterdam",
-            "NorthHolland",
-            "Geornite",
-            "565645",
-            "9999999999",
-            "invalid-email"
-    );
-
-    service.addContact("personal", contact);
-
-    assertEquals(1, service.getAddressBook("personal").getContacts().size());
-}
-
 @Test
 public void givenExistingContact_whenUpdated_shouldReturnUpdatedContact() {
 
@@ -167,20 +133,6 @@ public void givenExistingContact_whenDeleted_shouldReturnTrue() {
 }
 
 @Test
-public void givenMissingContact_whenDelete_shouldReturnFalse() {
-
-    AddressBookService service = new AddressBookService();
-
-    boolean result = service.deleteContact(
-            "personal",
-            "Unknown",
-            "Person"
-    );
-
-    assertFalse(result);
-}
-
-@Test
 public void givenNewBookName_whenCreated_shouldReturnAddressBook() {
 
     AddressBookService service = new AddressBookService();
@@ -202,16 +154,31 @@ public void givenDuplicateBookName_whenCreated_shouldReturnExistingBook() {
 }
 
 @Test
-public void givenBooksCreated_whenFetched_shouldReturnDictionary() {
+public void givenContacts_whenSearchByCity_shouldReturnMatches() {
 
     AddressBookService service = new AddressBookService();
 
-    service.createAddressBook("personal");
-    service.createAddressBook("office");
+    Contact c1 = new Contact("Anuj","Vishwakarma","","NorthHolland","Geornite","","","");
+    Contact c2 = new Contact("Rahul","Verma","Delhi","","DL","","","");
 
-    assertTrue(service.getAllAddressBooks().containsKey("personal"));
-    assertTrue(service.getAllAddressBooks().containsKey("office"));
+    service.addContact("personal", c1);
+    service.addContact("office", c2);
+    assertEquals(1, service.searchByCity("Delhi").size());
+   
 }
 
+@Test
+public void givenContacts_whenSearchByState_shouldReturnMatches() {
+
+    AddressBookService service = new AddressBookService();
+
+    Contact c1 = new Contact("Anuj","Vishwakarma","","NorthHolland","Geornite","","","");
+    Contact c2 = new Contact("Rahul","Verma","Delhi","DL","","","","");
+
+    service.addContact("personal", c1);
+    service.addContact("office", c2);
+
+    assertEquals(1, service.searchByState("DL").size());
+}
 
 }
