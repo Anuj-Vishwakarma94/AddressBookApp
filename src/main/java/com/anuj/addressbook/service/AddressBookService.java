@@ -117,8 +117,7 @@ public class AddressBookService {
         return addressBooks.values()
                 .stream()
                 .flatMap(book -> book.getContacts().stream())
-                .filter(contact -> contact.getCity() != null &&
-                        contact.getCity().equalsIgnoreCase(city))
+                .filter(contact -> contact.getCity().equalsIgnoreCase(city))
                 .collect(Collectors.toList());
     }
     
@@ -129,5 +128,21 @@ public class AddressBookService {
                 .flatMap(book -> book.getContacts().stream())
                 .filter(contact -> contact.getState().equalsIgnoreCase(state))
                 .collect(Collectors.toList());
+    }
+    
+    public Map<String, List<Contact>> viewPersonsByCity() {
+
+        return addressBooks.values()
+                .stream()
+                .flatMap(book -> book.getContacts().stream())
+                .collect(Collectors.groupingBy(Contact::getCity));
+    }
+    
+    public Map<String, List<Contact>> viewPersonsByState() {
+
+        return addressBooks.values()
+                .stream()
+                .flatMap(book -> book.getContacts().stream())
+                .collect(Collectors.groupingBy(Contact::getState));
     }
 }
