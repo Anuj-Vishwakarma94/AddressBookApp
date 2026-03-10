@@ -3,7 +3,11 @@ package com.anuj.addressbook;
 import com.anuj.addressbook.model.AddressBook;
 import com.anuj.addressbook.model.Contact;
 import com.anuj.addressbook.service.AddressBookService;
+import com.anuj.addressbook.util.FileUtil;
+
 import org.junit.jupiter.api.*;
+
+import java.io.*;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -221,7 +225,7 @@ public class AddressBookServiceTest {
                 "Geornite",
                 "567834",
                 "9999999999",
-                "tarus@update.com"
+                "Anuj@update.com"
         );
 
         Contact result = service.updateContact(
@@ -792,6 +796,7 @@ public class AddressBookServiceTest {
                 new Contact("Rahul","Verma","","Delhi","","","",""));
 
         List<Contact> sorted = service.sortContactsByCity("personal");
+
         assertEquals("Delhi", sorted.get(0).getCity());
     }
     
@@ -844,5 +849,64 @@ public class AddressBookServiceTest {
                 new Contact("Anuj","Vishwakarma","","NewJersey","","","",""));
 
         assertEquals(1, service.sortContactsByCity("personal").size());
+    }
+    
+    @Test
+    public void givenContacts_whenSavedToFile_shouldCreateFile() {
+
+        AddressBookService service = new AddressBookService();
+
+        service.addContact("personal",
+                new Contact("Anuj","Vishwakarma","","NewJersey","Geornite","567834","",""));
+
+        service.saveContactsToFile("personal","src/test/resources/testdata/test_contacts.txt");
+
+        File file = new File("src/test/resources/testdata/test_contacts.txt");
+
+        assertTrue(file.exists());
+    }
+
+    @Test
+    public void givenFile_whenRead_shouldReturnContacts() {
+
+        FileUtil.writeContactsToFile(
+                "src/test/resources/testdata/test_contacts.txt",
+                List.of(new Contact("Anuj","Vishwakarma","","NewJersey","Geornite","567834","",""))
+        );
+
+        List<Contact> contacts = FileUtil.readContactsFromFile(
+                "src/test/resources/testdata/test_contacts.txt"
+        );
+
+        assertEquals(1, contacts.size());
+    }
+
+    @Test
+    public void givenEmptyFile_whenRead_shouldReturnEmptyList() {
+
+        List<Contact> contacts =
+                FileUtil.readContactsFromFile("src/test/resources/testdata/empty.txt");
+
+        assertEquals(0, contacts.size());
+    }
+
+    @Test
+    public void givenMultipleContacts_whenSavedAndRead_shouldMatchCount() {
+
+        List<Contact> contacts = List.of(
+                new Contact("Anuj","Vishwakarma","","NewJersey","Geornite","567834","",""),
+                new Contact("Rahul","Verma","","Delhi","DL","110001","","")
+        );
+
+        FileUtil.writeContactsToFile(
+                "src/test/resources/testdata/multi_contacts.txt",
+                contacts
+        );
+
+        List<Contact> result = FileUtil.readContactsFromFile(
+                "src/test/resources/testdata/multi_contacts.txt"
+        );
+
+        assertEquals(2, result.size());
     }
 }
