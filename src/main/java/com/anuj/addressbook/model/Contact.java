@@ -16,15 +16,15 @@ public class Contact {
     public Contact() {
     }
 
-    public Contact(String firstName, String lastName, String city,
-                   String state, String address, String zip,
-                   String phoneNumber, String email) {
+    public Contact(String firstName, String lastName, String address,
+            String city, String state, String zip,
+            String phoneNumber, String email) {
 
         this.firstName = firstName;
         this.lastName = lastName;
+        this.address = address;
         this.city = city;
         this.state = state;
-        this.address = address;
         this.zip = zip;
         this.phoneNumber = phoneNumber;
         this.email = email;
@@ -96,15 +96,22 @@ public class Contact {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Contact)) return false;
+
+        if (this == o)
+            return true;
+
+        if (!(o instanceof Contact))
+            return false;
+
         Contact contact = (Contact) o;
-        return Objects.equals(firstName, contact.firstName) &&
-               Objects.equals(lastName, contact.lastName);
+
+        return firstName.equals(contact.firstName) &&
+                lastName.equals(contact.lastName);
     }
 
     @Override
     public int hashCode() {
+
         return Objects.hash(firstName, lastName);
     }
 }
