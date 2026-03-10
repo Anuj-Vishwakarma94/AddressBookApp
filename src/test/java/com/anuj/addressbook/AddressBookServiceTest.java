@@ -792,7 +792,6 @@ public class AddressBookServiceTest {
                 new Contact("Rahul","Verma","","Delhi","","","",""));
 
         List<Contact> sorted = service.sortContactsByCity("personal");
-        System.out.println(sorted.get(0).getCity());
         assertEquals("Delhi", sorted.get(0).getCity());
     }
     
