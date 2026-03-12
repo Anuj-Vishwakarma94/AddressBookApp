@@ -24,7 +24,7 @@ public class AddressBookServiceTest {
                 "Anuj",
                 "Vishwakarma",
                 "New City",
-                "Ariana",
+                "NewJersey",
                 "Geornite",
                 "567834",
                 "7634237809",
@@ -142,7 +142,7 @@ public class AddressBookServiceTest {
                 "Anuj",
                 "Vishwakarma",
                 "New City",
-                "Ariana",
+                "NewJersey",
                 "Geornite",
                 "567834",
                 "999999999999999",
@@ -162,7 +162,7 @@ public class AddressBookServiceTest {
                 "Anuj",
                 "Vishwakarma",
                 "New City",
-                "Ariana",
+                "NewJersey",
                 "Geornite",
                 "567834",
                 "7634237809",
@@ -198,7 +198,7 @@ public class AddressBookServiceTest {
                 "Anuj",
                 "Vishwakarma",
                 "New City",
-                "Ariana",
+                "NewJersey",
                 "Geornite",
                 "567834",
                 "7634237809",
@@ -266,7 +266,7 @@ public class AddressBookServiceTest {
                 "Anuj",
                 "Vishwakarma",
                 "New City",
-                "Ariana",
+                "NewJersey",
                 "Geornite",
                 "567834",
                 "7634237809",
@@ -312,7 +312,7 @@ public class AddressBookServiceTest {
     public void givenMultipleContacts_whenAdded_shouldStoreAllContacts2() {
 
         Contact c1 = new Contact(
-                "Anuj","Vishwakarma","New City","Ariana","Geornite",
+                "Anuj","Vishwakarma","New City","NewJersey","Geornite",
                 "567834","7634237809","tp@gmail.com");
 
         Contact c2 = new Contact(
@@ -426,7 +426,7 @@ public class AddressBookServiceTest {
     public void givenDuplicateContact_whenAdded_shouldThrowException() {
 
         Contact c1 = new Contact(
-                "Anuj","Vishwakarma","New City","Ariana",
+                "Anuj","Vishwakarma","New City","NewJersey",
                 "Geornite","567834","7634237809","tp@gmail.com");
 
         Contact c2 = new Contact(
@@ -479,19 +479,19 @@ public class AddressBookServiceTest {
     @Test
     public void givenContacts_whenSearchByCity_shouldReturnMatches() {
 
-        Contact c1 = new Contact("Anuj","Vishwakarma","","Ariana","Geornite","","","");
+        Contact c1 = new Contact("Anuj","Vishwakarma","","NewJersey","Geornite","","","");
         Contact c2 = new Contact("Rahul","Verma","","Delhi","DL","","","");
 
         service.addContact("personal", c1);
         service.addContact("office", c2);
 
-        assertEquals(1, service.searchByCity("Ariana").size());
+        assertEquals(1, service.searchByCity("NewJersey").size());
     }
     
     @Test
     public void givenContacts_whenSearchByState_shouldReturnMatches() {
 
-        Contact c1 = new Contact("Anuj","Vishwakarma","","Ariana","Geornite","","","");
+        Contact c1 = new Contact("Anuj","Vishwakarma","","NewJersey","Geornite","","","");
         Contact c2 = new Contact("Rahul","Verma","","Delhi","DL","","","");
 
         service.addContact("personal", c1);
@@ -509,36 +509,36 @@ public class AddressBookServiceTest {
     @Test
     public void givenDifferentCaseCity_whenSearch_shouldStillMatch() {
 
-        Contact c = new Contact("Anuj","Vishwakarma","","Ariana","Geornite","","","");
+        Contact c = new Contact("Anuj","Vishwakarma","","NewJersey","Geornite","","","");
         service.addContact("personal", c);
 
-        assertEquals(1, service.searchByCity("ariana").size());
+        assertEquals(1, service.searchByCity("NewJersey").size());
     }
     
     @Test
     public void givenMultipleContactsSameCity_whenSearch_shouldReturnAll() {
 
         service.addContact("personal",
-                new Contact("Anuj","Vishwakarma","","Ariana","Geornite","","",""));
+                new Contact("Anuj","Vishwakarma","","NewJersey","Geornite","","",""));
 
         service.addContact("office",
-                new Contact("Rahul","Verma","","Ariana","DL","","",""));
+                new Contact("Rahul","Verma","","NewJersey","DL","","",""));
 
-        assertEquals(2, service.searchByCity("Ariana").size());
+        assertEquals(2, service.searchByCity("NewJersey").size());
     }
     
     @Test
     public void givenContacts_whenGroupedByCity_shouldReturnCityMap() {
 
         service.addContact("personal",
-                new Contact("Anuj","Vishwakarma","","Ariana","Geornite","","",""));
+                new Contact("Anuj","Vishwakarma","","NewJersey","Geornite","","",""));
 
         service.addContact("office",
                 new Contact("Rahul","Verma","","Delhi","DL","","",""));
 
         Map<String, List<Contact>> result = service.viewPersonsByCity();
 
-        assertTrue(result.containsKey("Ariana"));
+        assertTrue(result.containsKey("NewJersey"));
         assertTrue(result.containsKey("Delhi"));
     }
     
@@ -546,21 +546,21 @@ public class AddressBookServiceTest {
     public void givenMultipleContactsSameCity_whenGrouped_shouldReturnList() {
 
         service.addContact("personal",
-                new Contact("Anuj","Vishwakarma","","Ariana","Geornite","","",""));
+                new Contact("Anuj","Vishwakarma","","NewJersey","Geornite","","",""));
 
         service.addContact("office",
-                new Contact("Amit","Sharma","","Ariana","Geornite","","",""));
+                new Contact("Amit","Sharma","","NewJersey","Geornite","","",""));
 
         Map<String, List<Contact>> result = service.viewPersonsByCity();
 
-        assertEquals(2, result.get("Ariana").size());
+        assertEquals(2, result.get("NewJersey").size());
     }
     
     @Test
     public void givenContacts_whenGroupedByState_shouldReturnStateMap() {
 
         service.addContact("personal",
-                new Contact("Anuj","Vishwakarma","","Ariana","Geornite","","",""));
+                new Contact("Anuj","Vishwakarma","","NewJersey","Geornite","","",""));
 
         Map<String, List<Contact>> result = service.viewPersonsByState();
 
@@ -577,7 +577,7 @@ public class AddressBookServiceTest {
     public void givenContactsAcrossBooks_whenGrouped_shouldCombineResults() {
 
         service.addContact("personal",
-                new Contact("Anuj","Vishwakarma","","Ariana","Geornite","","",""));
+                new Contact("Anuj","Vishwakarma","","NewJersey","Geornite","","",""));
 
         service.addContact("office",
                 new Contact("Rahul","Verma","","Delhi","DL","","",""));
@@ -591,21 +591,21 @@ public class AddressBookServiceTest {
     public void givenContacts_whenCountByCity_shouldReturnCorrectCounts() {
 
         service.addContact("personal",
-                new Contact("Anuj","Vishwakarma","","Ariana","Geornite","","",""));
+                new Contact("Anuj","Vishwakarma","","NewJersey","Geornite","","",""));
 
         service.addContact("office",
-                new Contact("Amit","Sharma","","Ariana","Geornite","","",""));
+                new Contact("Amit","Sharma","","NewJersey","Geornite","","",""));
 
         Map<String, Long> result = service.countContactsByCity();
 
-        assertEquals(2, result.get("Ariana"));
+        assertEquals(2, result.get("NewJersey"));
     }
     
     @Test
     public void givenContacts_whenCountByState_shouldReturnCorrectCounts() {
 
         service.addContact("personal",
-                new Contact("Anuj","Vishwakarma","","Ariana","Geornite","","",""));
+                new Contact("Anuj","Vishwakarma","","NewJersey","Geornite","","",""));
 
         service.addContact("office",
                 new Contact("Rahul","Verma","","Delhi","DL","","",""));
@@ -626,28 +626,28 @@ public class AddressBookServiceTest {
     public void givenContactsAcrossBooks_whenCount_shouldCombineResults() {
 
         service.addContact("personal",
-                new Contact("Anuj","Vishwakarma","","Ariana","Geornite","","",""));
+                new Contact("Anuj","Vishwakarma","","NewJersey","Geornite","","",""));
 
         service.addContact("office",
-                new Contact("Rahul","Verma","","Ariana","DL","","",""));
+                new Contact("Rahul","Verma","","NewJersey","DL","","",""));
 
         Map<String, Long> result = service.countContactsByCity();
 
-        assertEquals(2, result.get("Ariana"));
+        assertEquals(2, result.get("NewJersey"));
     }
     
     @Test
     public void givenCityDifferentCase_whenCount_shouldTreatSeparately() {
 
         service.addContact("personal",
-                new Contact("Anuj","Vishwakarma","","Ariana","Geornite","","",""));
+                new Contact("Anuj","Vishwakarma","","NewJersey","Geornite","","",""));
 
         service.addContact("office",
-                new Contact("Rahul","Verma","","ariana","DL","","",""));
+                new Contact("Rahul","Verma","","NewJersey","DL","","",""));
 
         Map<String, Long> result = service.countContactsByCity();
 
-        assertEquals(1, result.get("Ariana"));
+        assertEquals(2, result.get("NewJersey"));
     }
     
     @Test
@@ -702,14 +702,14 @@ public class AddressBookServiceTest {
     public void givenContacts_whenSortedByCity_shouldReturnSortedList() {
 
         service.addContact("personal",
-                new Contact("Anuj","Vishwakarma","","Ariana","","","",""));
+                new Contact("Anuj","Vishwakarma","","NewJersey","","","",""));
 
         service.addContact("personal",
                 new Contact("Rahul","Verma","","Delhi","","","",""));
 
         List<Contact> sorted = service.sortContactsByCity("personal");
 
-        assertEquals("Ariana", sorted.get(0).getCity());
+        assertEquals("Delhi", sorted.get(0).getCity());
     }
     
     @Test
@@ -750,7 +750,7 @@ public class AddressBookServiceTest {
     public void givenSingleContact_whenSorted_shouldReturnSame() {
 
         service.addContact("personal",
-                new Contact("Anuj","Vishwakarma","","Ariana","","","",""));
+                new Contact("Anuj","Vishwakarma","","NewJersey","","","",""));
 
         assertEquals(1, service.sortContactsByCity("personal").size());
     }
@@ -759,7 +759,7 @@ public class AddressBookServiceTest {
     public void givenContacts_whenSavedToFile_shouldCreateFile() {
 
         service.addContact("personal",
-                new Contact("Anuj","Vishwakarma","","Ariana","Geornite","567834","",""));
+                new Contact("Anuj","Vishwakarma","","NewJersey","Geornite","567834","",""));
 
         service.saveContactsToFile("personal","src/test/resources/testdata/test_contacts.txt");
 
@@ -773,7 +773,7 @@ public class AddressBookServiceTest {
 
         FileUtil.writeContactsToFile(
                 "src/test/resources/testdata/test_contacts.txt",
-                List.of(new Contact("Anuj","Vishwakarma","","Ariana","Geornite","567834","",""))
+                List.of(new Contact("Anuj","Vishwakarma","","NewJersey","Geornite","567834","",""))
         );
 
         List<Contact> contacts = FileUtil.readContactsFromFile(
@@ -796,7 +796,7 @@ public class AddressBookServiceTest {
     public void givenMultipleContacts_whenSavedAndRead_shouldMatchCount() {
 
         List<Contact> contacts = List.of(
-                new Contact("Anuj","Vishwakarma","","Ariana","Geornite","567834","",""),
+                new Contact("Anuj","Vishwakarma","","NewJersey","Geornite","567834","",""),
                 new Contact("Rahul","Verma","","Delhi","DL","110001","","")
         );
 
@@ -816,7 +816,7 @@ public class AddressBookServiceTest {
     public void givenContacts_whenSavedToCSV_shouldCreateCSVFile() {
 
         service.addContact("personal",
-                new Contact("Anuj","Vishwakarma","","Ariana","Geornite","567834","",""));
+                new Contact("Anuj","Vishwakarma","","NewJersey","Geornite","567834","",""));
 
         service.saveContactsToCSV("personal","src/test/resources/testdata/test_contacts.csv");
 
@@ -830,7 +830,7 @@ public class AddressBookServiceTest {
 
         CSVUtil.writeContactsToCSV(
                 "src/test/resources/testdata/test_contacts.csv",
-                List.of(new Contact("Anuj","Vishwakarma","","Ariana","Geornite","567834","",""))
+                List.of(new Contact("Anuj","Vishwakarma","","NewJersey","Geornite","567834","",""))
         );
 
         List<Contact> contacts = CSVUtil.readContactsFromCSV("src/test/resources/testdata/test_contacts.csv");
@@ -842,7 +842,7 @@ public class AddressBookServiceTest {
     public void givenMultipleContacts_whenSavedAndLoadedCSV_shouldMatchCount() {
 
         List<Contact> contacts = List.of(
-                new Contact("Anuj","Vishwakarma","","Ariana","Geornite","567834","",""),
+                new Contact("Anuj","Vishwakarma","","NewJersey","Geornite","567834","",""),
                 new Contact("Rahul","Verma","","Delhi","DL","110001","","")
         );
 
@@ -865,7 +865,7 @@ public class AddressBookServiceTest {
     public void givenContacts_whenSavedToJSON_shouldCreateFile() {
 
         service.addContact("personal",
-                new Contact("Anuj","Vishwakarma","","Ariana","Geornite","567834","",""));
+                new Contact("Anuj","Vishwakarma","","NewJersey","Geornite","567834","",""));
 
         String path = "src/test/resources/testdata/test_contacts.json";
 
@@ -880,7 +880,7 @@ public class AddressBookServiceTest {
     public void givenJSONFile_whenRead_shouldReturnContacts() {
 
         List<Contact> contacts = List.of(
-                new Contact("Anuj","Vishwakarma","","Ariana","Geornite","567834","","")
+                new Contact("Anuj","Vishwakarma","","NewJersey","Geornite","567834","","")
         );
 
         JSONUtil.writeContactsToJSON(
@@ -899,7 +899,7 @@ public class AddressBookServiceTest {
     public void givenMultipleContacts_whenSavedAndLoadedJSON_shouldMatchCount() {
 
         List<Contact> contacts = List.of(
-                new Contact("Anuj","Vishwakarma","","Ariana","Geornite","567834","",""),
+                new Contact("Anuj","Vishwakarma","","NewJersey","Geornite","567834","",""),
                 new Contact("Rahul","Verma","","Delhi","DL","110001","","")
         );
 
