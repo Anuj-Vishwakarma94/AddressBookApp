@@ -3,6 +3,7 @@ package com.anuj.addressbook.service;
 import com.anuj.addressbook.model.AddressBook;
 import com.anuj.addressbook.model.Contact;
 import com.anuj.addressbook.util.FileUtil;
+import com.anuj.addressbook.util.CSVUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -235,10 +236,26 @@ public class AddressBookService {
 
         FileUtil.writeContactsToFile(filePath, book.getContacts());
     }
-
-
+    
     public List<Contact> loadContactsFromFile(String filePath) {
 
         return FileUtil.readContactsFromFile(filePath);
+    }
+    
+    public void saveContactsToCSV(String bookName, String filePath) {
+
+        AddressBook book = addressBooks.get(bookName);
+
+        if(book == null) {
+            return;
+        }
+
+        CSVUtil.writeContactsToCSV(filePath, book.getContacts());
+    }
+
+
+    public List<Contact> loadContactsFromCSV(String filePath) {
+
+        return CSVUtil.readContactsFromCSV(filePath);
     }
 }
