@@ -1,2 +1,2 @@
-Anuj,Vishwakarma,Ariana,Geornite,567834
+Anuj,Vishwakarma,NewJersey,Geornite,567834
 Rahul,Verma,Delhi,DL,110001
