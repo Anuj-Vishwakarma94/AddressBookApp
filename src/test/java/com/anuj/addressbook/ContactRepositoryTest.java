@@ -11,6 +11,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 
+import java.util.List;
+import java.util.Map;
+
 @SpringBootTest
 public class ContactRepositoryTest {
 
@@ -45,5 +48,23 @@ public class ContactRepositoryTest {
                 );
 
         assertTrue(contacts.size() > 0);
+    }
+    
+    @Test
+    public void givenDatabase_whenCountByCityRequested_shouldReturnCounts() {
+
+        Map<String, Long> result = repository.countContactsByCity();
+
+        assertNotNull(result);
+        assertTrue(result.size() > 0);
+    }
+    
+    @Test
+    public void givenDatabase_whenCountByStateRequested_shouldReturnCounts() {
+
+        Map<String, Long> result = repository.countContactsByState();
+
+        assertNotNull(result);
+        assertTrue(result.size() > 0);
     }
 }
