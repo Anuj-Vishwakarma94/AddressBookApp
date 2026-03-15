@@ -1,8 +1,8 @@
 package com.anuj.addressbook.controller;
 
-import com.anuj.addressbook.dto.ContactDTO;
 import com.anuj.addressbook.model.AddressBook;
 import com.anuj.addressbook.model.Contact;
+import com.anuj.addressbook.dto.ContactDTO;
 import com.anuj.addressbook.service.AddressBookService;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
@@ -234,5 +234,19 @@ public class AddressBookController {
     public Map<String, Long> countContactsByStateDB() {
 
         return service.countContactsByStateFromDB();
+    }
+    
+    @PostMapping("/db/add-contact")
+    public String addContactToDB(@RequestBody ContactDTO dto) {
+
+        Contact contact = service.convertToModel(dto);
+
+        int inserted = service.addContactToDatabase(contact);
+
+        if(inserted > 0) {
+            return "Contact added successfully";
+        }
+
+        return "Failed to add contact";
     }
 }
