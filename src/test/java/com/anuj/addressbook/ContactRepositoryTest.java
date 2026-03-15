@@ -8,6 +8,7 @@ import com.anuj.addressbook.repository.ContactRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 @SpringBootTest
 public class ContactRepositoryTest {
 
@@ -18,5 +19,17 @@ public class ContactRepositoryTest {
     public void givenDatabase_whenContactsFetched_shouldReturnRecords() {
 
     	assertNotNull(repository.getAllContacts());
+    }
+    
+    @Test
+    public void givenContact_whenCityUpdated_shouldReturnUpdatedRows() {
+
+        int rows = repository.updateContactCity(
+                "Anuj",
+                "Vishwakarma",
+                "Delhi"
+        );
+
+        assertTrue(rows > 0);
     }
 }
