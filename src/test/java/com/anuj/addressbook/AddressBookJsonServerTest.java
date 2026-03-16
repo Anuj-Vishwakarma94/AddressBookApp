@@ -40,14 +40,14 @@ public class AddressBookJsonServerTest {
 
         String newContact = """
             {
-              "firstName": "Rohit",
+              "firstName": "Amit",
               "lastName": "Sharma",
               "address": "",
               "city": "Mumbai",
               "state": "MH",
               "zip": "400001",
-              "phoneNumber": "0000000000",
-              "email": "rohit@gmail.com"
+              "phoneNumber": "7777777777",
+              "email": "amit@gmail.com"
             }
             """;
 
@@ -60,6 +60,35 @@ public class AddressBookJsonServerTest {
                         .post("http://localhost:3000/contacts");
 
         assertEquals(201, response.getStatusCode());
+
+        //System.out.println(response.getBody().asPrettyString());
+    }
+    
+    @Test
+    public void givenExistingContact_whenUpdated_shouldReturnSuccess() {
+
+        String updatedContact = """
+            {
+              "firstName": "Anuj",
+              "lastName": "Vishwakarma",
+              "address": "",
+              "city": "Mumbai",
+              "state": "MH",
+              "zip": "411001",
+              "phoneNumber": "9999999999",
+              "email": "anuj@gmail.com"
+            }
+            """;
+
+        Response response =
+                RestAssured
+                        .given()
+                        .contentType("application/json")
+                        .body(updatedContact)
+                        .when()
+                        .put("http://localhost:3000/contacts/1");
+
+        assertEquals(200, response.getStatusCode());
 
     }
 }
