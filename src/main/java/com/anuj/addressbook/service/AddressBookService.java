@@ -1,8 +1,8 @@
 package com.anuj.addressbook.service;
 
-import com.anuj.addressbook.dto.ContactDTO;
 import com.anuj.addressbook.model.AddressBook;
 import com.anuj.addressbook.model.Contact;
+import com.anuj.addressbook.dto.ContactDTO;
 import com.anuj.addressbook.repository.ContactRepository;
 import com.anuj.addressbook.storage.ContactStorage;
 import com.anuj.addressbook.storage.FileStorage;
@@ -348,5 +348,10 @@ public class AddressBookService {
     public Map<String, Long> countContactsByStateFromDB() {
 
         return repository.countContactsByState();
+    }
+    
+    public int addContactToDatabase(Contact contact) {
+
+        return repository.addContact(contact);
     }
 }
