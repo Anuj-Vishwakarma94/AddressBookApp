@@ -8,6 +8,7 @@ import com.anuj.addressbook.storage.ContactStorage;
 import com.anuj.addressbook.storage.FileStorage;
 import com.anuj.addressbook.storage.CSVStorage;
 import com.anuj.addressbook.storage.JSONStorage;
+import com.anuj.addressbook.threads.AddContactTask;
 
 import org.springframework.stereotype.Service;
 
@@ -353,5 +354,28 @@ public class AddressBookService {
     public int addContactToDatabase(Contact contact) {
 
         return repository.addContact(contact);
+    }
+    
+    public void addMultipleContactsToDatabase(List<Contact> contacts) {
+
+        List<Thread> threads = new ArrayList<>();
+
+        for(Contact contact : contacts) {
+
+            Thread thread = new Thread(
+                    new AddContactTask(repository, contact)
+            );
+
+            threads.add(thread);
+            thread.start();
+        }
+
+        for(Thread thread : threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }
