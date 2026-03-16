@@ -29,81 +29,7 @@
   - Encapsulates all contact fields with appropriate constructors and accessor methods.
   - Added **unit tests (`ContactTest`)** to validate object creation and ensure correctness of stored contact attributes.
   - Establishes the foundational domain object used by future **service, repository, and controller layers**.
-
----
-
-- 🧩 **UC2 – Add Contact to Address Book :**  
-  _Pending implementation._
-
-- 🧩 **UC3 – Edit Existing Contact :**  
-  _Pending implementation._
-
-- 🧩 **UC4 – Delete Contact :**  
-  _Pending implementation._
-
-- 🧩 **UC5 – Prevent Duplicate Entries :**  
-  _Pending implementation._
-
-- 🧩 **UC6 – Multiple Address Books :**  
-  _Pending implementation._
-
-- 🧩 **UC7 – Search Person by City or State :**  
-  _Pending implementation._
-
-- 🧩 **UC8 – View Persons by City or State :**  
-  _Pending implementation._
-
-- 🧩 **UC9 – Count Contacts by City or State :**  
-  _Pending implementation._
-
-- 🧩 **UC10 – Sort Contacts Alphabetically :**  
-  _Pending implementation._
-
-- 🧩 **UC11 – Sort Contacts by City, State, or Zip :**  
-  _Pending implementation._
-
-- 🧩 **UC12 – Write Address Book to File :**  
-  _Pending implementation._
-
-- 🧩 **UC13 – Read Address Book from File :**  
-  _Pending implementation._
-
-- 🧩 **UC14 – Count Contacts in File :**  
-  _Pending implementation._
-
-- 🧩 **UC15 – Write Contacts to CSV File :**  
-  _Pending implementation._
-
-- 🧩 **UC16 – Read Contacts from CSV File :**  
-  _Pending implementation._
-
-- 🧩 **UC17 – Write Contacts to JSON File :**  
-  _Pending implementation._
-
-- 🧩 **UC18 – Read Contacts from JSON File :**  
-  _Pending implementation._
-
-- 🧩 **UC19 – Add Contacts Using Threads :**  
-  _Pending implementation._
-
-- 🧩 **UC20 – Measure Time for Threaded Contact Addition :**  
-  _Pending implementation._
-
-- 🧩 **UC21 – Add Multiple Contacts Using Thread Pools :**  
-  _Pending implementation._
-
-- 🧩 **UC22 – Measure Thread Pool Performance :**  
-  _Pending implementation._
-
-- 🧩 **UC23 – Store Address Book in Database :**  
-  _Pending implementation._
-
-- 🧩 **UC24 – Retrieve Contacts from Database :**  
-  _Pending implementation._
-
-- 🧩 **UC25 – Update Contact in Database :**  
-  _Pending implementation._
-
+  - 
 ---
 
 ### 🧰 Tech Stack
@@ -202,12 +128,8 @@ mvnw spring-boot:run
 - The system evolves through layered architecture using Controller, Service, and Repository separation.
 - Progressive enhancements introduce search, sorting, persistence, multithreading, and database support.
 
----
 
 
 
 ---
 
-<div align="center">
-✨ Incrementally developed using Test-Driven Development and progressive feature expansion.
-</div>
