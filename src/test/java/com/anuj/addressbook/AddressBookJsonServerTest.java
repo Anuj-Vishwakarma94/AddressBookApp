@@ -40,14 +40,14 @@ public class AddressBookJsonServerTest {
 
         String newContact = """
             {
-              "firstName": "Amit",
+              "firstName": "Rohit",
               "lastName": "Sharma",
               "address": "",
               "city": "Mumbai",
               "state": "MH",
               "zip": "400001",
-              "phoneNumber": "7777777777",
-              "email": "amit@gmail.com"
+              "phoneNumber": "0000000000",
+              "email": "rohit@gmail.com"
             }
             """;
 
@@ -61,7 +61,6 @@ public class AddressBookJsonServerTest {
 
         assertEquals(201, response.getStatusCode());
 
-        //System.out.println(response.getBody().asPrettyString());
     }
     
     @Test
@@ -90,5 +89,19 @@ public class AddressBookJsonServerTest {
 
         assertEquals(200, response.getStatusCode());
 
+    }
+    
+    @Test
+    public void givenExistingContact_whenDeleted_shouldReturnSuccess() {
+
+        Response response =
+                RestAssured
+                        .given()
+                        .when()
+                        .delete("http://localhost:3000/contacts/2");
+
+        assertEquals(200, response.getStatusCode());
+
+        System.out.println("Contact deleted successfully");
     }
 }
